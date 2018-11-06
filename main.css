@@ -1,0 +1,16 @@
+html, body{
+	margin: 0;
+}
+
+.masonry{
+	display: flex;
+	flex-flow: wrap;
+
+}
+
+.mel{
+	width: 270px;
+	height: 410px;
+	overflow: hidden;
+	margin: 10px;
+}

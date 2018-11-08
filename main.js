@@ -119,6 +119,10 @@ var app = new Vue({
 			})
 		}
 	}
+	
 })
 
-
+fire.once('value', (snap) => {
+	this.db = snap.val()
+	app.maso()
+})

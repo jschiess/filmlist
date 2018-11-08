@@ -21,21 +21,25 @@
 
 <body>
 	<div id="app">
-
-		<form id="forminp">
+		<form @keydown.enter="addel(request)" action="#"  class='menu' id="forminp">
 			<input type='text' v-model='request'>
+			<input type="button" value="GO" v-on:click="addel(request)">
 		</form>
+
 
 		<div class="masonry">
 			
-			<div class='mel' v-for="a in img">
-				<img width="270px" v-bind:src="a" alt="">
+			<div class='mel' v-for="a,i in obj">
+				
+				<input type="button" value="X" v-on:click="del(a,i)">
+
+				<img width="270px" v-bind:src="getposter(a.poster_path)" alt="">
 			</div>
 		</div>
 
-		<img v-bind:src="img" alt="">
 	</div>
 </body>
+
 <script src="main.js"></script>
 
 </html>

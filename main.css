@@ -5,6 +5,7 @@ html, body{
 .masonry{
 	display: flex;
 	flex-flow: wrap;
+	padding-top: 60px;
 
 }
 
@@ -13,4 +14,35 @@ html, body{
 	height: 410px;
 	overflow: hidden;
 	margin: 10px;
+}
+
+.mel input[type=button]{
+	background:red;
+	position: absolute;
+	border: 0;
+	font-weight: bold
+}
+
+
+/*
+ * MENU
+ */
+
+.menu{
+	position: fixed;
+	width: 100%;
+	padding: 10px 0px;
+	background: gray;
+	display: flex;
+	justify-content: center
+}
+
+.menu input[type=text]{
+	margin: 0 5px;
+	padding: 0;
+	border: 0;
+	height: 2em;
+}
+.menu input{
+	height: 2em;
 }

@@ -1,5 +1,3 @@
-//$(document).ready(function () {
-
 var config = {
 	apiKey: "AIzaSyDnHUH6Ye4NP4eacQIJEz035GU2izj7Abk",
 	authDomain: "filmlist-7f806.firebaseapp.com",
@@ -13,69 +11,72 @@ firebase.initializeApp(config);
 const fire = firebase.database().ref().child('/')
 
 
-var myobj = []
-
-fire.once('value', (snap) => {
-	app.db = snap.val()
-	app.maso()
-})
-
-
-
-
-
 var app = new Vue({
 	el: '#app',
 	data: {
-		request: 'primer',
-		img: [],
-		db: myobj
+		request: 'fill',
+		obj: [],
+		db: []
+	},
+	created: function () {
+		
+
+
+
+		fire.once('value', (snap) => {
+			app.db = snap.val()
+			app.maso()
+
+		})
 	},
 	methods: {
-		posterp: function (q) {
-			let end
+		getposter: function (a) {
+			let baseUrl = 'https://image.tmdb.org/t/p/'
+			let filesize = 'w500'
+			let filepath = a
+			return baseUrl + filesize + filepath
+		},
+		posterp: function (q, n) {
+
 			/* 
-			* GET request prerequisits
-			* to search the moviedb
-			* gets multiple resulte and uses the first one
-			*/
+			 * GET request prerequisits
+			 * to search the moviedb
+			 * gets multiple resulte and uses the first one
+			 */
+
+
 			let query = q
+
 			let api_key = '2fb2a73cdabea954fa733209911eea69'
 			let urlbody = 'https://api.themoviedb.org/3'
 			let url = urlbody + '/search/movie?api_key=' + api_key + '&language=en-US&query=' + query + '&page=1&include_adult=false'
 
 			/* 
-			* GET request to moviedb
-			*
-			* retardef ufkcinf prommis pissn me off
-			*/
+			 * GET request to moviedb
+			 */
+
 			$.get(url, function (sdata, serr) {
-
-				let movieID = sdata.results[0].id
-
-				let findurl = 'https://api.themoviedb.org/3/movie/' + movieID + '?api_key=' + api_key + '&language=en-US'
 				/*
-				* uses the last the first element in the results to do stuff
-				* builds the path of the image
-				*/
-				let baseUrl = 'https://image.tmdb.org/t/p/'
-				let filesize = 'w500'
-				let filepath = sdata.results[0].poster_path
+				 * uses the last the first element in the results to do stuff
+				 * builds the path of the image
+				 */
 
 				/*
-				* sets the image path to the vue object 
-				*/
+				 * sets the image path to the vue object 
+				 */
 
-				app.img.push(baseUrl + filesize + filepath)
-
+				let temp = sdata.results[0]
+				app.$set(app.obj, n , temp)
 			})
-
 		},
 		maso: function () {
-			console.log(this.db);
 
-			for (n of this.db) {
-				console.log((this.posterp(n.name)))
+			for (n in this.db) {
+				console.log(this.db);
+				console.log(n);
+				
+				
+				this.posterp(this.db[n].name, n)
 			}
 
 		},
@@ -83,29 +84,41 @@ var app = new Vue({
 			return this.db
 		},
 		addel: function (a) {
-			let temp = this.getobj()
-			let tempobj = {name: a}
-			temp.push(tempobj)
+			var tempobj = this.getobj()
+			console.log(tempobj);
+			
+			tempobj.push({
+				name: a
+			})
 
-			fire.set(temp)
+
+			fire.set(tempobj)
+
+			fire.once('value', (snap) => {
+				this.db = snap.val()
+				app.maso()
+			})
+
+
+		},
+		test: function () {
+
+		},
+		del: function (a, i) {
+			let temp = this.db
+
+			//delete temp[i];
+			this.$delete(this.obj, i);
+			this.$delete(this.db, i);
+
+			fire.set(this.db)
+
+			fire.once('value', (snap) => {
+				this.db = snap.val()
+				app.maso()
+			})
 		}
 	}
 })
-
-
-
-app.addel('primer')
-
-
-
-//})
-
-
-
-
-
-
-
-
 
 

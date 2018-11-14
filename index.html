@@ -11,35 +11,38 @@
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 	<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-	<script>
-		// Initialize Firebase
 
-	</script>
+	<script src="jquery.js"></script>
 </head>
 
 <body>
 	<div id="app">
-		<form @keydown.enter="addel(request)" action="#"  class='menu' id="forminp">
+		<form @keydown.enter="addel(request)" action="#" class='menu' id="forminp">
 			<input type='text' v-model='request'>
-			<input type="button" value="GO" v-on:click="addel(request)">
+			<input type="button" value="add movie" v-on:click="addel(request)">
 		</form>
 
-
-		<div class="masonry">
-			
-			<div class='mel' v-for="a,i in obj">
-				
-				<input type="button" value="X" v-on:click="del(a,i)">
-
-				<img width="270px" v-bind:src="getposter(a.poster_path)" alt="">
+		<div v-if='localdb != []'>
+			<div class="masonry">
+				<div class='mel' v-if='' v-for="d, i of localdb" v-bind:id='localdb[i].id' v-on:click='kek(localdb[i].id)'>
+					
+					<input type="button" value="X" v-on:click="del(d,i)">
+					
+					<img v-bind:src='"https://image.tmdb.org/t/p/w500/" + localdb[i].poster_path'>
+					<div class="moreinfo" v-bind:style="{ 'background-image': 'url(' +' https://image.tmdb.org/t/p/w500' + localdb[i].backdrop_path + ')', }" >
+						<h1>{{ localdb[i].title }}</h1>
+						<p>{{ localdb[i].overview }} </p>
+					</div>
+					<div class="spacer"></div>
+				</div>
 			</div>
 		</div>
+		<div v-else></div>
 
 	</div>
 </body>
 
-<script src="main.js"></script>
+<script src="Vuefire.js"></script>
 
 </html>

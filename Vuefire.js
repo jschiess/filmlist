@@ -30,7 +30,7 @@ var app = new Vue({
 	methods: {
 		getposter: function (filepath) {
 			let baseUrl = 'https://image.tmdb.org/t/p/';
-			let filesize = 'w500';
+			let filesize = 'original';
 			//
 			return baseUrl + filesize + filepath;
 

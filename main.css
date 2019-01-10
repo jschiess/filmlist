@@ -31,22 +31,11 @@ html, body{
 	flex-grow: 1 ;
 }
 
-.mel:hover{
-	transition: 500ms;
-}
-
-img:hover{
-	transition: 500ms;
-	
-	
-}
-
 img{
 	pointer-events: none;
 	width: 100%;
 	max-width: 800px;
 	max-height: 100%;
-	transition: 500ms;
 }
 
 /*mediaquerries*/
@@ -59,12 +48,11 @@ img{
 	z-index: 4;
 	overflow: hidden;
 	background: no-repeat  ;
-	background-position: 100px 0px;
-	background-size: 100% 100%;
-	background-attachment: fixed;
+	background-position: 100% 0px;
+	background-size: auto 100%;
+	/* background-attachment: fixed; */
 	padding: 0 1%;
 	box-shadow: inset 80vw 0 10vw -20vw #fff
-	
 	
 }
 
@@ -80,7 +68,7 @@ img{
 	font-family: monospace;
 }
 .moreinfo p{
-	font-size: 2em;
+	font-size: 1.4em;
 	width: 60vw;
 	text-align: left;
 	padding: 0;

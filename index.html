@@ -29,8 +29,8 @@
 					
 					<input type="button" value="X" v-on:click="del(d,i)">
 					
-					<img v-bind:src='"https://image.tmdb.org/t/p/w500/" + localdb[i].poster_path'>
-					<div class="moreinfo" v-bind:style="{ 'background-image': 'url(' +' https://image.tmdb.org/t/p/w500' + localdb[i].backdrop_path + ')', }" >
+					<img v-bind:src='"https://image.tmdb.org/t/p/original/" + localdb[i].poster_path'>
+					<div class="moreinfo" v-bind:style="{ 'background-image': 'url(' +' https://image.tmdb.org/t/p/original' + localdb[i].backdrop_path + ')', }" >
 						<h1>{{ localdb[i].title }}</h1>
 						<p>{{ localdb[i].overview }} </p>
 					</div>
@@ -42,7 +42,5 @@
 
 	</div>
 </body>
-
 <script src="Vuefire.js"></script>
-
 </html>
